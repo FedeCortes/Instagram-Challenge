@@ -9,6 +9,10 @@ function App() {
   return (
     <>
       <Publicacion></Publicacion>
+
+      <Publicacion></Publicacion>
+      
+      <Publicacion></Publicacion>
     </>
   )
 }
