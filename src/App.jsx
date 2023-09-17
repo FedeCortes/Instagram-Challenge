@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Publicacion from './components/Publicacion'
-
+import Crear from './components/Crear'
 import './App.css'
 
 function App() {
@@ -8,10 +8,11 @@ function App() {
 
   return (
     <>
+      <Crear></Crear>
       <Publicacion></Publicacion>
 
       <Publicacion></Publicacion>
-      
+
       <Publicacion></Publicacion>
     </>
   )
