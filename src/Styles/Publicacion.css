@@ -1,0 +1,11 @@
+.delete-icon:hover {
+    background-color: red; /* Cambia el color de fondo al pasar el cursor sobre el icono */
+    color: white; 
+    cursor: pointer; /* Cambia el cursor al estilo de puntero */
+  }
+
+.favorite-icon:hover {
+
+    cursor:pointer;
+}
+

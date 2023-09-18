@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import '../styles/Publicacion.css';
 
 const Crear = () => {
   const handleOpenDialog = async () => {
@@ -29,11 +30,11 @@ const Crear = () => {
         confirmButtonText: 'Crear Publicación',
       });
 
-      if (optionalText) {
+      if (url) {
         // Realiza la solicitud POST a tu API con likes establecido en 0
         axios.post('http://localhost:9000/api/publicaciones', {
           url,
-          descripcion: optionalText,
+          descripcion:  optionalText || "",
           likes: 0, // Establece likes en 0
         })
         .then(response => {
@@ -50,7 +51,7 @@ const Crear = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Button onClick={handleOpenDialog} style={{ backgroundColor: "grey", color: "white", marginBottom: "2%" }}>
+      <Button onClick={handleOpenDialog} className='crear-button'>
         <strong>Crear publicación <br />+ </strong>
       </Button>
     </div>

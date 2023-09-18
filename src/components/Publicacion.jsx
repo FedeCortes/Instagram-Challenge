@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from 'axios'; // Importa Axios para hacer solicitudes HTTP
 import DeleteIcon from '@mui/icons-material/Delete';
+import '../styles/Publicacion.css';
+
 
 const Publicacion = ({ url, desc, postId, likes }) => {
   const [meGusta, setMeGusta] = useState(likes);
@@ -12,9 +14,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
 
   // Función para verificar si la URL es un video
   const esVideo = (url) => {
-    // Puedes agregar lógica para verificar si la URL es de un video
-    // Por ejemplo, puedes verificar la extensión de la URL o algún otro criterio específico.
-    // Aquí se asume que si la URL contiene "youtube.com" es un video, pero puedes personalizar esto.
+   
     return url.includes('youtube.com');
   };
 
@@ -85,7 +85,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
           alignItems: "flex-end", // Alinea el ícono a la derecha
         }}
       >
-        <DeleteIcon onClick={deletePost} />
+        <DeleteIcon onClick={deletePost} className="delete-icon" />
         {esVideo(url) ? (
           // Si es un video, muestra el video en lugar de la imagen
           <iframe
@@ -93,7 +93,6 @@ const Publicacion = ({ url, desc, postId, likes }) => {
             height="225"
             src={url}
             title="Video"
-            frameBorder="0"
             allowFullScreen
           ></iframe>
         ) : (
@@ -130,7 +129,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
           // Si no se está editando, mostrar la descripción y el botón de editar
           <>
             <Box >
-              <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} />
+              <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} className='favorite-icon'/>
              
               <p style={{ margin: "0", marginLeft: "8px" }}><strong>{meGusta} Me gusta </strong></p>
             </Box>

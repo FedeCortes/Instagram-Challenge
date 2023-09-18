@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Publicacion from './components/Publicacion'
 import Crear from './components/Crear'
-import './App.css'
+
 import ListarPublicaciones from './components/ListarPublicaciones'
 
 function App() {
