@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from 'axios'; // Importa Axios para hacer solicitudes HTTP
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../styles/Publicacion.css';
+import Swal from 'sweetalert2';
 
 
 const Publicacion = ({ url, desc, postId, likes }) => {
@@ -41,7 +42,8 @@ const Publicacion = ({ url, desc, postId, likes }) => {
     axios.delete(`http://localhost:9000/api/publicaciones/${postId}/`)
     .then(response => {
       // Maneja la respuesta del servidor, si es necesario
-      alert('Publicación borrada en el servidor:', response.data);
+    
+      Swal.fire('Publicación eliminada', 'Eliminaste una publicacion del servidor', 'error');
     })
     .catch(error => {
       // Maneja el error, si es necesario
