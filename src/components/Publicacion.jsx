@@ -7,6 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const Publicacion = ({ url, desc, postId, likes }) => {
   const [meGusta, setMeGusta] = useState(likes);
+  const [editando, setEditando] = useState(false); // Estado para controlar si se está editando la descripción
+  const [nuevaDescripcion, setNuevaDescripcion] = useState(desc); // Estado para almacenar la nueva descripción
 
   const agregarMeGusta = () => {
     setMeGusta(meGusta + 1);
@@ -14,7 +16,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
     // Realiza una solicitud PUT al backend para actualizar los "likes" en el servidor
     axios.put(`http://localhost:9000/api/publicaciones/${postId}/`, {
       url: url,
-      descripcion: desc,
+      descripcion: nuevaDescripcion, // Usar la nueva descripción
       likes: meGusta + 1,
     })
       .then(response => {
@@ -31,12 +33,34 @@ const Publicacion = ({ url, desc, postId, likes }) => {
     axios.delete(`http://localhost:9000/api/publicaciones/${postId}/`)
     .then(response => {
       // Maneja la respuesta del servidor, si es necesario
-      alert('Publicacion borrada en el servidor:', response.data);
+      alert('Publicación borrada en el servidor:', response.data);
     })
     .catch(error => {
       // Maneja el error, si es necesario
-      console.error('Error al borrar publicacion del servidor:', error);
+      console.error('Error al borrar publicación del servidor:', error);
     });
+  }
+
+  const handleEditar = () => {
+    setEditando(true); // Habilita la edición
+  }
+
+  const handleGuardar = () => {
+    // Realiza una solicitud PUT al backend para actualizar la descripción
+    axios.put(`http://localhost:9000/api/publicaciones/${postId}/`, {
+      url: url,
+      descripcion: nuevaDescripcion, // Usa la nueva descripción
+      likes: meGusta,
+    })
+      .then(response => {
+        // Maneja la respuesta del servidor, si es necesario
+        console.log('Descripción actualizada en el servidor:', response.data);
+        setEditando(false); // Deshabilita la edición después de guardar
+      })
+      .catch(error => {
+        // Maneja el error, si es necesario
+        console.error('Error al actualizar descripción en el servidor:', error);
+      });
   }
 
   return (
@@ -46,14 +70,14 @@ const Publicacion = ({ url, desc, postId, likes }) => {
       alignItems="center"
       justifyContent="center"
     >
-         <Box
+      <Box
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end", // Alinea el ícono a la derecha
         }}
       >
-        <DeleteIcon onClick={deletePost}/>
+        <DeleteIcon onClick={deletePost} />
         <img
           src={url}
           style={{ width: "400px" }}
@@ -71,13 +95,29 @@ const Publicacion = ({ url, desc, postId, likes }) => {
           alignItems: "flex-start",
         }}
       >
-        <Box display="flex" alignItems="center">
-          <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} />
-          <p style={{ margin: "0", marginLeft: "8px" }}>{meGusta} Me gusta</p>
-        </Box>
-        <Typography variant="body2" color="textSecondary">
-          {desc}
-        </Typography>
+        {editando ? (
+          // Si se está editando, mostrar un campo de entrada de texto para editar la descripción
+          <>
+            <input
+              type="text"
+              value={nuevaDescripcion}
+              onChange={(e) => setNuevaDescripcion(e.target.value)}
+            />
+            <button onClick={handleGuardar}>Guardar</button>
+          </>
+        ) : (
+          // Si no se está editando, mostrar la descripción y el botón de editar
+          <>
+            <Box display="flex" alignItems="center">
+              <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} />
+              <p style={{ margin: "0", marginLeft: "8px" }}>{meGusta} Me gusta</p>
+            </Box>
+            <Typography variant="body2" color="textSecondary">
+              {desc}
+            </Typography>
+            <button onClick={handleEditar}>Editar</button>
+          </>
+        )}
       </Box>
     </Box>
   );
