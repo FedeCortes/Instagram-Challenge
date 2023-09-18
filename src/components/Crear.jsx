@@ -3,7 +3,6 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-
 const Crear = () => {
   const handleOpenDialog = async () => {
     const { value: url } = await Swal.fire({
@@ -19,37 +18,41 @@ const Crear = () => {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Siguiente',
     });
-  
-    const { value: optionalText } = await Swal.fire({
-      title: 'Texto opcional',
-      input: 'text',
-      inputPlaceholder: 'Ingrese un texto opcional',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Crear Publicación',
-    });
-  
-    // Realiza la solicitud POST a tu API con likes establecido en 0
-    axios.post('http://localhost:9000/api/publicaciones', {
-      url,
-      descripcion: optionalText,
-      likes: 0, // Establece likes en 0
-    })
-    .then(response => {
-      // Maneja la respuesta del servidor, por ejemplo, muestra un mensaje de éxito
-      Swal.fire('Éxito', 'Publicación creada exitosamente', 'success');
-    })
-    .catch(error => {
-      // Maneja el error, por ejemplo, muestra un mensaje de error
-      Swal.fire('Error', 'No se pudo crear la publicación', 'error');
-    });
-  };
-  return (
 
+    if (url) {
+      const { value: optionalText } = await Swal.fire({
+        title: 'Texto opcional',
+        input: 'text',
+        inputPlaceholder: 'Ingrese un texto opcional',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Crear Publicación',
+      });
+
+      if (optionalText) {
+        // Realiza la solicitud POST a tu API con likes establecido en 0
+        axios.post('http://localhost:9000/api/publicaciones', {
+          url,
+          descripcion: optionalText,
+          likes: 0, // Establece likes en 0
+        })
+        .then(response => {
+          // Maneja la respuesta del servidor, por ejemplo, muestra un mensaje de éxito
+          Swal.fire('Éxito', 'Publicación creada exitosamente', 'success');
+        })
+        .catch(error => {
+          // Maneja el error, por ejemplo, muestra un mensaje de error
+          Swal.fire('Error', 'No se pudo crear la publicación', 'error');
+        });
+      }
+    }
+  };
+
+  return (
     <div style={{ textAlign: 'center' }}>
-      <Button onClick={handleOpenDialog} style={{backgroundColor:"grey", color:"white", marginBottom:"2%"}}>
+      <Button onClick={handleOpenDialog} style={{ backgroundColor: "grey", color: "white", marginBottom: "2%" }}>
         <strong>Crear publicación <br />+ </strong>
-     </Button>
+      </Button>
     </div>
   );
 }

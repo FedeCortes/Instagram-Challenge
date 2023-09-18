@@ -10,6 +10,14 @@ const Publicacion = ({ url, desc, postId, likes }) => {
   const [editando, setEditando] = useState(false); // Estado para controlar si se está editando la descripción
   const [nuevaDescripcion, setNuevaDescripcion] = useState(desc); // Estado para almacenar la nueva descripción
 
+  // Función para verificar si la URL es un video
+  const esVideo = (url) => {
+    // Puedes agregar lógica para verificar si la URL es de un video
+    // Por ejemplo, puedes verificar la extensión de la URL o algún otro criterio específico.
+    // Aquí se asume que si la URL contiene "youtube.com" es un video, pero puedes personalizar esto.
+    return url.includes('youtube.com');
+  };
+
   const agregarMeGusta = () => {
     setMeGusta(meGusta + 1);
 
@@ -78,11 +86,24 @@ const Publicacion = ({ url, desc, postId, likes }) => {
         }}
       >
         <DeleteIcon onClick={deletePost} />
-        <img
-          src={url}
-          style={{ width: "400px" }}
-          alt="Imagen"
-        />
+        {esVideo(url) ? (
+          // Si es un video, muestra el video en lugar de la imagen
+          <iframe
+            width="400"
+            height="225"
+            src={url}
+            title="Video"
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          // Si no es un video, muestra la imagen
+          <img
+            src={url}
+            style={{ width: "400px" }}
+            alt="Imagen"
+          />
+        )}
       </Box>
 
       <Box
@@ -108,9 +129,10 @@ const Publicacion = ({ url, desc, postId, likes }) => {
         ) : (
           // Si no se está editando, mostrar la descripción y el botón de editar
           <>
-            <Box display="flex" alignItems="center">
+            <Box >
               <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} />
-              <p style={{ margin: "0", marginLeft: "8px" }}>{meGusta} Me gusta</p>
+             
+              <p style={{ margin: "0", marginLeft: "8px" }}><strong>{meGusta} Me gusta </strong></p>
             </Box>
             <Typography variant="body2" color="textSecondary">
               {desc}
