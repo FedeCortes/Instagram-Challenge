@@ -9,7 +9,7 @@ const ListarPublicaciones = () => {
     // Función para obtener las publicaciones desde la API
     const obtenerPublicaciones = async () => {
       try {
-        const response = await axios.get('http://localhost:9000/api/publicaciones');
+        const response = await axios.get('https://instagramchallenge-r5vgbaz8y-fedecortes.vercel.app/api/publicaciones');
         // Actualizar el estado con los datos de las publicaciones
         setPublicaciones(response.data);
       } catch (error) {

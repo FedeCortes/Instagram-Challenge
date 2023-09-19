@@ -32,7 +32,7 @@ const Crear = () => {
 
       if (url) {
         // Realiza la solicitud POST a tu API con likes establecido en 0
-        axios.post('http://localhost:9000/api/publicaciones', {
+        axios.post('https://instagramchallenge-r5vgbaz8y-fedecortes.vercel.app/api/publicaciones', {
           url,
           descripcion:  optionalText || "",
           likes: 0, // Establece likes en 0

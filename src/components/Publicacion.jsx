@@ -23,7 +23,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
     setMeGusta(meGusta + 1);
 
     // Realiza una solicitud PUT al backend para actualizar los "likes" en el servidor
-    axios.put(`http://localhost:9000/api/publicaciones/${postId}/`, {
+    axios.put(`https://instagramchallenge-r5vgbaz8y-fedecortes.vercel.app/api/publicaciones/${postId}/`, {
       url: url,
       descripcion: nuevaDescripcion, // Usar la nueva descripción
       likes: meGusta + 1,
@@ -39,7 +39,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
   };
 
   const deletePost = () => {
-    axios.delete(`http://localhost:9000/api/publicaciones/${postId}/`)
+    axios.delete(`https://instagramchallenge-r5vgbaz8y-fedecortes.vercel.app/api/publicaciones/${postId}/`)
     .then(response => {
       // Maneja la respuesta del servidor, si es necesario
     
@@ -57,7 +57,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
 
   const handleGuardar = () => {
     // Realiza una solicitud PUT al backend para actualizar la descripción
-    axios.put(`http://localhost:9000/api/publicaciones/${postId}/`, {
+    axios.put(`https://instagramchallenge-r5vgbaz8y-fedecortes.vercel.app/api/publicaciones/${postId}/`, {
       url: url,
       descripcion: nuevaDescripcion, // Usa la nueva descripción
       likes: meGusta,
