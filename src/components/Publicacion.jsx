@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from 'axios'; // Importa Axios para hacer solicitudes HTTP
 import DeleteIcon from '@mui/icons-material/Delete';
-import '../styles/Publicacion.css';
+import '../Styles/Publicacion.css';
 import Swal from 'sweetalert2';
 
 
