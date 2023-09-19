@@ -8,4 +8,17 @@
 
     cursor:pointer;
 }
+.responsive{
+  width: 400px;
+  height:225;
+}
 
+/* Estilos para pantallas más chicas */
+@media (max-width: 600px) {
+ 
+  .responsive {
+    width: 100%; /* Haz que la imagen ocupe todo el ancho */
+  }
+  
+  
+}

@@ -91,8 +91,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
         {esVideo(url) ? (
           // Si es un video, muestra el video en lugar de la imagen
           <iframe
-            width="400"
-            height="225"
+            className="responsive"
             src={url}
             title="Video"
             allowFullScreen
@@ -101,15 +100,16 @@ const Publicacion = ({ url, desc, postId, likes }) => {
           // Si no es un video, muestra la imagen
           <img
             src={url}
-            style={{ width: "400px" }}
             alt="Imagen"
+            className="responsive"
           />
         )}
       </Box>
 
       <Box
+      className="responsive"
         style={{
-          width: "400px",
+          
           marginTop: "16px",
           padding: "16px",
           display: "flex",

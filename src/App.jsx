@@ -3,7 +3,6 @@ import ListarPublicaciones from './components/ListarPublicaciones'
 
 function App() {
 
-
   return (
     <>
       <Crear></Crear>
