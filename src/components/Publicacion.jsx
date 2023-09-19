@@ -7,6 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import '../Styles/Publicacion.css';
 import Swal from 'sweetalert2';
 
+import Card from '@mui/material/Card'; // Importa la tarjeta
+import CardContent from '@mui/material/CardContent'; // Importa el contenido de la tarjeta
+
 
 const Publicacion = ({ url, desc, postId, likes }) => {
   const [meGusta, setMeGusta] = useState(likes);
@@ -74,6 +77,8 @@ const Publicacion = ({ url, desc, postId, likes }) => {
   }
 
   return (
+    <Card>
+    <CardContent>
     <Box
       display="flex"
       flexDirection="column"
@@ -81,7 +86,7 @@ const Publicacion = ({ url, desc, postId, likes }) => {
       justifyContent="center"
     >
       <Box
-        style={{
+        sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end", // Alinea el ícono a la derecha
@@ -108,9 +113,9 @@ const Publicacion = ({ url, desc, postId, likes }) => {
 
       <Box
       className="responsive"
-        style={{
+        sx={{
           
-          marginTop: "16px",
+          marginTop: "5px",
           padding: "16px",
           display: "flex",
           flexDirection: "column",
@@ -130,11 +135,25 @@ const Publicacion = ({ url, desc, postId, likes }) => {
         ) : (
           // Si no se está editando, mostrar la descripción y el botón de editar
           <>
-            <Box >
-              <FavoriteBorderIcon fontSize="large" onClick={agregarMeGusta} className='favorite-icon'/>
-             
-              <p style={{ margin: "0", marginLeft: "8px" }}><strong>{meGusta} Me gusta </strong></p>
-            </Box>
+     <Box
+  display="flex"
+  
+  flexDirection="column" // Cambia la dirección de los elementos a columna
+  sx={{
+    marginBottom: 0,
+    "&:hover": { cursor: "pointer" },
+  }}
+>
+  <FavoriteBorderIcon
+    fontSize="large"
+    onClick={agregarMeGusta}
+    sx={{ marginBottom: "4px" }} // Ajusta el margen inferior del ícono
+  />
+  
+  <Typography sx={{ margin: 0, padding: 0 }} variant="body2">
+    <strong>{meGusta} Me gusta </strong>
+  </Typography>
+</Box>
             <Typography variant="body2" color="textSecondary">
               {desc}
             </Typography>
@@ -143,6 +162,8 @@ const Publicacion = ({ url, desc, postId, likes }) => {
         )}
       </Box>
     </Box>
+    </CardContent>
+    </Card>
   );
 }
 

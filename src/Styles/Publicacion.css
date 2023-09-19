@@ -4,10 +4,6 @@
     cursor: pointer; /* Cambia el cursor al estilo de puntero */
   }
 
-.favorite-icon:hover {
-
-    cursor:pointer;
-}
 .responsive{
   width: 400px;
   height:225;
