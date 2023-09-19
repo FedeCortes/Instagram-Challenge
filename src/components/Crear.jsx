@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import '../styles/Publicacion.css';
+import '../Styles/Publicacion.css';
 
 const Crear = () => {
   const handleOpenDialog = async () => {
